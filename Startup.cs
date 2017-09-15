@@ -45,7 +45,7 @@ namespace ItineraryAPI
 
             //Set up DB 
             services.AddDbContext<ItineraryAPIContext>(options =>
-    options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+                options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
 
             // Set up identity server so services like SignInManager can be injected into controllers
             services.AddIdentity<User, IdentityRole>()
@@ -84,7 +84,7 @@ namespace ItineraryAPI
             }
 
             app.UseAuthentication();
-            app.UseCors("AllowWhiteListOrigins");
+            app.UseCors("CorsPolicy");
 
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
